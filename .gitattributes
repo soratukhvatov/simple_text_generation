@@ -1,0 +1,2 @@
+test-clm filter=lfs diff=lfs merge=lfs -text
+test-clm/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text
