@@ -6,7 +6,7 @@ from transformers import pipeline
 
 @st.cache(allow_output_mutation=True, suppress_st_warning=True)
 def load_model():
-    return pipeline("text-generation", model="test-clm")
+    return pipeline("text-generation", model="mymodel")
 
 
 model = load_model()
