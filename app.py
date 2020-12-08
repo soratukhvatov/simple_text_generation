@@ -1,12 +1,31 @@
+
 import urllib
 import streamlit as st
 import torch
 from transformers import pipeline
+from pathlib import Path
+import subprocess
 
+list_files = subprocess.run(["ls", "-l"])
+print("The exit code was: %d" % list_files.returncode)
+
+list_files = subprocess.run(["ls", "mymodel","-la"])
+print("The exit code was: %d" % list_files.returncode)
 
 @st.cache(allow_output_mutation=True, suppress_st_warning=True)
 def load_model():
-    return pipeline("text-generation", model="mymodel")
+    cloud_model_location = "1bNaZemZ88E1arDOiSTRWFlsRw_QaiPu9"
+
+    f_checkpoint = Path("mymodel/pytorch_model.bin")
+    x = 0
+    if not f_checkpoint.exists():
+        with st.spinner("Downloading model... this may take awhile! \n Don't stop it!"):
+            from GD_download import download_file_from_google_drive
+            download_file_from_google_drive(cloud_model_location, f_checkpoint)
+
+    list_files = subprocess.run(["ls", "mymodel","-la"])
+    print("The exit code was: %d" % list_files.returncode)
+    return pipeline("text-generation", model="gpt2")
 
 
 model = load_model()
