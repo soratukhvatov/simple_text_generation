@@ -25,7 +25,7 @@ def load_model():
 
     list_files = subprocess.run(["ls", "mymodel","-la"])
     print("The exit code was: %d" % list_files.returncode)
-    return pipeline("text-generation", model="gpt2")
+    return pipeline("text-generation", model="mymodel")
 
 
 model = load_model()
