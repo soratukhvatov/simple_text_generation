@@ -15,7 +15,7 @@ print("The exit code was: %d" % list_files.returncode)
 @st.cache(allow_output_mutation=True, suppress_st_warning=True)
 def load_model():
     
-    cloud_model_location = "1-j9pfSXsS-o9BE3M2sjNWX8cI5r_TMsd"
+    cloud_model_location = "1-1v1jjPZPAtC4ZCLwx7bZQmK9w-Qww7e"
 
     f_checkpoint = Path("mymodel/pytorch_model.bin")
     x = 0
