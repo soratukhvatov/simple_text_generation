@@ -1,3 +1,2 @@
-test-clm filter=lfs diff=lfs merge=lfs -text
-test-clm/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text
-mymodel/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text
+mygpt2-medium filter=lfs diff=lfs merge=lfs -text
+; test-clm-tolkin/pytorch_model.bin filter=lfs diff=lfs merge=lfs -text

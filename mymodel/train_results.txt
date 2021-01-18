@@ -1,3 +1,0 @@
-epoch = 3.0
-train_runtime = 2952.3275
-train_samples_per_second = 2.306
