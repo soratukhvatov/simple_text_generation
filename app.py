@@ -1,4 +1,3 @@
-
 import urllib
 import streamlit as st
 import string
@@ -6,15 +5,19 @@ import torch
 from transformers import pipeline
 from pathlib import Path
 import subprocess
-
-list_files = subprocess.run(["ls", "-l"])
-print("The exit code was: %d" % list_files.returncode)
-
-list_files = subprocess.run(["ls", "mygpt2-medium", "-la"])
-print("The exit code was: %d" % list_files.returncode)
-
 from mytextgenerationpipeline import run_my_pplm
 from transformers import GPT2Tokenizer
+from transformers.modeling_gpt2 import GPT2LMHeadModel
+
+
+def if_remote(flag=True):
+    list_files = subprocess.run(["ls", "-l"])
+    print("The exit code was: %d" % list_files.returncode)
+
+    list_files = subprocess.run(["ls", "mygpt2-medium", "-la"])
+    print("The exit code was: %d" % list_files.returncode)
+
+
 
 @st.cache(allow_output_mutation=True, suppress_st_warning=True)
 def load_model():
@@ -27,17 +30,9 @@ def load_model():
             from GD_download import download_file_from_google_drive
             download_file_from_google_drive(cloud_model_location, f_checkpoint)
 
-    list_files = subprocess.run(["ls", "mygpt2-medium", "-la"])
-    print("The exit code was: %d" % list_files.returncode)
+    # list_files = subprocess.run(["ls", "mygpt2-medium", "-la"])
+    # print("The exit code was: %d" % list_files.returncode)
 
-
-    # return pipeline("text-generation", model="mygpt2-medium")
-    from transformers.modeling_gpt2 import GPT2LMHeadModel
-    from transformers import AutoTokenizer
-
-    # model = GPT2LMHeadModel.from_pretrained("mygpt2-medium")
-    # tokenizer = AutoTokenizer.from_pretrained("mygpt2-medium")
-    # >> > pipeline('ner', model=model, tokenizer=tokenizer)
     # load pretrained model
     pretrained = "mygpt2-medium"
     model = GPT2LMHeadModel.from_pretrained(
@@ -46,8 +41,7 @@ def load_model():
     )
     tokenizer = GPT2Tokenizer.from_pretrained(pretrained)
 
-    return model, tokenizer#pipeline("text-generation", model="mygpt2-medium")#, tokenizer=tokenizer)#, config="mygpt2-medium")
-
+    return model, tokenizer
 
 model, tokenizer = load_model()
 st.title('Text generation')
@@ -62,7 +56,7 @@ textbox = st.text_area('Start your story:', 'The original Blockchain is open-sou
 slider = st.slider('Max story length (in characters)', 50, 200, 140)
 button = st.button('Generate')
 
-listoftopics = ['legal', 'military', 'monsters', 'politics', 'religion', 'science', 'space', 'technology']
+listoftopics = ['None', 'legal', 'military', 'monsters', 'politics', 'religion', 'science', 'space', 'technology']
 discriminators = ['clickbait', 'non clickbait', 'positive sentiment', 'neg sentiment']
 
 topics = st.sidebar.radio("Select a Topic", listoftopics)
@@ -77,9 +71,7 @@ c1, c2 = st.sidebar.beta_columns(2)
 rand_seed = c1.number_input('Random Seed', value=0)
 
 # st.write('<style>div.row-widget.stRadio > div{flex-direction:row;}</style>', unsafe_allow_html=True)
-# x=0
-# print(topics)
-# 0/0
+
 if button:
     # output_text = model(textbox, max_length=slider)[0]['generated_text']
 

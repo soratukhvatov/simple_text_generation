@@ -175,6 +175,8 @@ def  run_my_pplm(
 ):
     torch.manual_seed(seed)
     np.random.seed(seed)
+    if bag_of_words is 'None':
+        bag_of_words = None
 
 
     # set verbosiry

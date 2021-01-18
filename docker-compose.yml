@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+
+
+  nginx:
+    container_name: nginx
+    restart: always
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - streamlit
+
+  streamlit:
+    container_name: app
+    restart: always
+    build: .
+    ports:
+      - "8501:8501"
+    command: streamlit run app.py
+
+
+#     version: "3"
+# services:
+#   streamlit:
+#     build: .
+#     command: "streamlit run src/main.py"
+#     ports:
+#       - "8501:8501"
+#     volumes:
+#       - "./src:/usr/src/app/src"

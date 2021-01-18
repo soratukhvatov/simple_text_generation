@@ -61,6 +61,7 @@ Send2Trash==1.5.0
 sentencepiece==0.1.94
 six==1.15.0
 smmap==3.0.4
+streamlit
 terminado==0.9.1
 testpath==0.4.4
 tensorboard==2.4.0
